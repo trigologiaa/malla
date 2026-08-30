@@ -1,4 +1,4 @@
-package com.untref.computacion.mallaComputacion;
+package com.untref.computacion.malla;
 
 import org.springframework.boot.test.context.TestConfiguration;
 
