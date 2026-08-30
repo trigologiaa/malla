@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.java]
+indent_size = 4
+max_line_length = 100
+ij_continuation_indent_size = 8
+ij_java_align_multiline_parameters = false
+ij_java_align_multiline_chained_methods = false
+
+[*.{xml,properties}]
+indent_size = 4
+
+[*.{yml,yaml,json,js,ts,html,css}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+
+[Makefile]
+indent_style = tab
