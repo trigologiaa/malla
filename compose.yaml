@@ -1,1 +1,43 @@
-services: {}
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: malla-computacion:latest
+    container_name: malla-computacion-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - malla-net
+  db:
+    image: mariadb:11.4
+    container_name: malla-computacion-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - malla-net
+volumes:
+  mariadb_data:
+networks:
+  malla-net:
+    driver: bridge
