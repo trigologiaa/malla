@@ -7,6 +7,7 @@
 - Docker
 - Checkstyle
 - Spring Boot 4.1.1
+- Make
 
 ## TODO
 
